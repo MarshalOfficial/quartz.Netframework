@@ -12,6 +12,7 @@ namespace quartz.Netframework
 {
     public class SampleJob : IJob
     {
+        private static int callcount;
         public async Task Execute(Quartz.IJobExecutionContext context)
         {
             Console.WriteLine("start");
@@ -26,8 +27,8 @@ namespace quartz.Netframework
             tasks.ForEach(t => t.Start());
 
             await Task.WhenAll(tasks.ToArray());
-            sw.Stop();            
-            Console.WriteLine($"all tasks done in {sw.Elapsed}");
+            sw.Stop();
+            Console.WriteLine($"all tasks done {callcount} api call in {sw.Elapsed}");
         }
 
         private void writefile()
@@ -42,7 +43,8 @@ namespace quartz.Netframework
 
                 for (int i = 0; i < 10; i++)
                 {
-                    var result = Get("https://google.com");
+                    var result = Get("https://amazon.com");
+                    callcount++;
                     Console.WriteLine("call " + index + "," + i.ToString() + ": " + result);
                 }
                 
