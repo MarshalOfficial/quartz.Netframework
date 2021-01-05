@@ -38,15 +38,12 @@ namespace quartz.Netframework
                 //var index = DateTime.Now.ToString();
                 Console.WriteLine("start:" + index);
                 Random rand = new Random(DateTime.Now.Second);
-                
-                
+
+
                 for (int i = 0; i < 10; i++)
                 {
-                    using(var client = new HttpClient())
-                    {
-                        var result = Get("https://google.com");
-                        Console.WriteLine("call " + index + "," + i.ToString() + ": " + result);
-                    }
+                    var result = Get("https://google.com");
+                    Console.WriteLine("call " + index + "," + i.ToString() + ": " + result);
                 }
                 
                 Console.WriteLine("api call ended for index:" + index);
